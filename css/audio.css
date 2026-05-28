@@ -1,0 +1,436 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../img/bg0.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: "Microsoft YaHei", sans-serif;
+  overflow: hidden;
+  transition: background-image 0.5s ease;
+}
+
+/* ========== 上部区域：唱片 + 音乐介绍 ========== */
+.upper-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 130px);
+  padding: 40px;
+}
+
+/* 唱片容器 */
+.record-container {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #1a1a1a 40%, #333 42%, #1a1a1a 44%, #000 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.record-bg {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+#record-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-image: url("../img/record0.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* 唱片旋转动画 */
+.rotate-play {
+  animation: rotate 8s linear infinite;
+}
+
+.rotate-pause {
+  animation-play-state: paused;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 音乐介绍 */
+.introduction-container {
+  margin-left: 60px;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+#music-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.author-container {
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+#author-name {
+  font-size: 18px;
+}
+
+/* ========== 底部音频播放器 ========== */
+.audio-box {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 130px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+}
+
+.audio-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 30px;
+}
+
+/* ========== 进度条 ========== */
+.a-progress {
+  width: 100%;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.pgs-total {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+}
+
+.pgs-play {
+  height: 100%;
+  background: #1db954;
+  border-radius: 3px;
+  width: 0%;
+  transition: width 0.3s linear;
+  position: relative;
+}
+
+.pgs-play::after {
+  content: "";
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.pgs-total:hover .pgs-play::after {
+  opacity: 1;
+}
+
+/* ========== 控制按钮区域 ========== */
+.a-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 50px;
+}
+
+/* 时间显示 */
+.time-container {
+  color: #fff;
+  font-size: 14px;
+  min-width: 120px;
+  opacity: 0.9;
+}
+
+/* 中间按钮组 */
+.center-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+}
+
+.center-icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.2s;
+}
+
+.center-icon:hover {
+  transform: scale(1.15);
+}
+
+/* 播放模式按钮 */
+.mode {
+  background-image: url("../img/mode1.png");
+}
+
+/* 上一首 */
+.s-right {
+  background-image: url("../img/%E4%B8%8A%E4%B8%80%E9%A6%96.png");
+}
+
+/* 暂停/播放按钮 */
+.icon-play {
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  background-image: url("../img/%E7%BB%A7%E7%BB%AD%E6%92%AD%E6%94%BE.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.2s;
+}
+
+.icon-play:hover {
+  transform: scale(1.1);
+}
+
+.icon-pause {
+  background-image: url("../img/%E6%9A%82%E5%81%9C.png");
+}
+
+/* 下一首 */
+.s-left {
+  background-image: url("../img/%E4%B8%8B%E4%B8%80%E9%A6%96.png");
+}
+
+/* 音量按钮 */
+.volume {
+  background-image: url("../img/%E9%9F%B3%E9%87%8F.png");
+}
+
+.volume-mute {
+  background-image: url("../img/%E9%9D%99%E9%9F%B3.png");
+}
+
+/* 音量滑块 */
+#volumn-togger {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(30px);
+  width: 100px;
+  height: 5px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  outline: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+#volumn-togger::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: #1db954;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.center-button-container:hover #volumn-togger {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 后部按钮组 */
+.bottom-button-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-width: 120px;
+  justify-content: flex-end;
+}
+
+.bottom-icon {
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.2s;
+  opacity: 0.8;
+}
+
+.bottom-icon:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* 列表按钮 */
+.list {
+  background-image: url("../img/%E5%88%97%E8%A1%A8.png");
+}
+
+/* MV按钮 */
+.MV {
+  background-image: url("../img/MV.png");
+}
+
+/* 倍速按钮 */
+.speed {
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 3px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.speed:hover {
+  border-color: #1db954;
+  color: #1db954;
+}
+
+/* ========== 音乐列表 ========== */
+.music-list {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 300px;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(15px);
+  z-index: 200;
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
+.close-list {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 300px;
+  height: 100vh;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 200;
+}
+
+.music-list-container {
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.music-list-title {
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.line {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin: 10px 0;
+}
+
+.all-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.all-list div {
+  color: rgba(255, 255, 255, 0.7);
+  padding: 12px 15px;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.all-list div:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.all-list div.active {
+  color: #1db954;
+  background: rgba(29, 185, 84, 0.1);
+}
+
+/* ========== MV视频遮罩 ========== */
+.mv-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.mv-overlay video {
+  max-width: 80%;
+  max-height: 70vh;
+  border-radius: 8px;
+}
+
+.mv-close {
+  margin-top: 20px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  transition: all 0.2s;
+  background: transparent;
+}
+
+.mv-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #fff;
+}
